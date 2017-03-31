@@ -35,16 +35,20 @@ module.exports = function parse_input(input){
    * @throws Error if the operation's format is not valid
   */
   function parseOperation(){
-	const textOperation = /(UPDATE|QUERY)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)(\s+(\d+)\s+(\d+))?/g.exec(lines.shift());
+  	const lineOperation = lines.shift();
+  	if (lineOperation == null){
+	  throw new Error('Bad constructed test case: M is greater than number of operations');
+	}
+	const textOperation = /(UPDATE|QUERY)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)(\s+(\d+)\s+(\d+))?/g.exec(lineOperation);
 	if (textOperation == null){
 	  throw new Error('Bad constructed test case: invalid format for operation');
 	}
 
 	var operation = {
 	  type: textOperation[1],
-	  x: parseInt(textOperation[2]),
-	  y: parseInt(textOperation[3]),
-	  z: parseInt(textOperation[4]),
+	  x: parseInt(textOperation[2])-1, //because the matrix' indexes start in 0
+	  y: parseInt(textOperation[3])-1,
+	  z: parseInt(textOperation[4])-1,
 	  x2: null,
 	  y2: null,
 	  z2: null,
@@ -52,11 +56,11 @@ module.exports = function parse_input(input){
 	};
 
 	if(textOperation[6] != null){
-	  operation.x2 = parseInt(textOperation[5]),
-	  operation.y2 = parseInt(textOperation[7]),
-	  operation.z2 = parseInt(textOperation[8]),
+	  operation.x2 = parseInt(textOperation[5])-1;
+	  operation.y2 = parseInt(textOperation[7])-1;
+	  operation.z2 = parseInt(textOperation[8])-1;
 	} else {
-	  operation.W = parseInt(textOperation[5]),
+	  operation.W = parseInt(textOperation[5]);
 	}
 
 	return operation;

@@ -2,8 +2,13 @@
 <html>
 <head>
   <title>Cube Summation</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
+    h1 {
+      text-align: center;
+    }
     .row {
       margin: 50px 100px;
     }
@@ -13,12 +18,13 @@
       font-size: 1.25em;
     }
     .buttons {
-      margin-top: 100px;
+      margin-top: 150px;
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <h1>Cube Summation Challenge</h1>
     <div class="row">
       <div class="input_column col-md-5">
         <h4><strong>Input:</strong></h4>
@@ -36,9 +42,7 @@ QUERY 1 1 1 2 2 2
 QUERY 2 2 2 2 2 2</textarea>
       </div>
       <div class="buttons col-md-2">
-        <button type="button" class="btn btn-primary">Send</button>
-        <br><br>
-        <button type="button" class="btn btn-primary">Reset</button>
+        <button type="button" class="btn btn-primary" onclick="send()">Send</button>
       </div>
       <div class="output col-md-5">
         <h4><strong>Output:</strong></h4>
@@ -47,5 +51,39 @@ QUERY 2 2 2 2 2 2</textarea>
     </div>
   </div>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    function send() {
+      var inputText = document.getElementById('input_text').value;
+      if (!inputText) {
+        return alert('You need to write an input!');
+      }
+      inputText = inputText.trim();
+      var outputText = document.getElementById('output_text');
+      outputText.innerHTML = '';
+
+      fetch('/', {  
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ input: inputText })
+      })
+      .then(function (response) {
+        if (response.status != 200) throw response;
+        return response.json();
+      })
+      .then(function (json) {
+        //var output = json.out.replace(/\n/g, '<br>');
+        var output = json.out;
+        outputText.innerHTML = output;
+      })
+      .catch(function (response) {
+        if (response.json) {
+          response.json().then(function (json) {
+            outputText.innerHTML = json.message;
+          });
+        }
+      })
+    }
+    </script>
 </body>
 </html>

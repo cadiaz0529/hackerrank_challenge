@@ -29,7 +29,6 @@ module.exports = class Operation {
 	execute(matrix){
 		if(this.type == "UPDATE"){
 			matrix[this.x][this.y][this.z] = this.W;
-			return null;
 		} else {
 			return executeQuery(matrix, [this.x, this.y, this.z], [this.x2, this.y2, this.z2]);
 		}

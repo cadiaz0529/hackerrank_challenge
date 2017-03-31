@@ -42,7 +42,7 @@ module.exports = class Case {
 			const operationObject = new Operation(op);
 			const result = operationObject.execute(this.matrix);
 			if (result != null) {
-				this.output += toString(result)+"\n";
+				this.output += result.toString()+"\n";
 			}
 	    });
 	}

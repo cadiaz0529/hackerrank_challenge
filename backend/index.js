@@ -14,14 +14,15 @@ app.post('/', function (request, response) {
   const input = request.body.input;
   try {
     const input_parsed = parse_input(input);
-    var response = '';
+    var out = '';
 
     input_parsed.forEach(c => {
       const test_case = new Case(c);
       test_case.executeOperation();
-      response = test_case.output;
+      out += test_case.output;
     });
-    response.send({ out: response });
+
+    response.send({ out: out });
   } catch (err) {
     response.status(500).send({ message: err.message });
   }
