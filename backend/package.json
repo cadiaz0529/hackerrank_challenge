@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend for HackerRank challenge: cube summation",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cadiaz0529/hackerrank_challenge.git"
+  },
+  "keywords": [
+    "backend",
+    "nodejs"
+  ],
+  "author": "Carlos Andres Diaz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cadiaz0529/hackerrank_challenge/issues"
+  },
+  "homepage": "https://github.com/cadiaz0529/hackerrank_challenge#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2"
+  }
+}
