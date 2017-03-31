@@ -14,19 +14,19 @@ module.exports = function parse_input(input){
    * @throws Error if the test case block is badly constructed in the input
   */
   function parseCase() {
-    const testCaseHead = /(\d+)\s+(\d+)/g.exec(lines.shift());
-    if (testCaseHead == null){
-      throw new Error('Bad constructed test case: there is no N nor M');
-    }
-    const N = testCaseHead[1];
-    const M = testCaseHead[2];
-    var operations = [];
+	const testCaseHead = /(\d+)\s+(\d+)/g.exec(lines.shift());
+	if (testCaseHead == null){
+	  throw new Error('Bad constructed test case: there is no N nor M');
+	}
+	const N = testCaseHead[1];
+	const M = testCaseHead[2];
+	var operations = [];
 
-    for(var i=0; i<M; i++){
-      operations.push(parseOperation());
-    }
+	for(var i=0; i<M; i++){
+	  operations.push(parseOperation());
+	}
 
-    return operations;
+	return { N, operations };
   }
 
   /** 
@@ -35,34 +35,38 @@ module.exports = function parse_input(input){
    * @throws Error if the operation's format is not valid
   */
   function parseOperation(){
-    const textOperation = /(UPDATE|QUERY)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)(\s+(\d+)\s+(\d+))?/g.exec(lines.shift());
-    if (textOperation == null){
-      throw new Error('Bad constructed test case: invalid format for operation');
-    }
+	const textOperation = /(UPDATE|QUERY)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)(\s+(\d+)\s+(\d+))?/g.exec(lines.shift());
+	if (textOperation == null){
+	  throw new Error('Bad constructed test case: invalid format for operation');
+	}
 
-    var operation = {
-      type: textOperation[1],
-      x: parseInt(textOperation[2]),
-      y: parseInt(textOperation[3]),
-      z: parseInt(textOperation[4])
-    };
+	var operation = {
+	  type: textOperation[1],
+	  x: parseInt(textOperation[2]),
+	  y: parseInt(textOperation[3]),
+	  z: parseInt(textOperation[4]),
+	  x2: null,
+	  y2: null,
+	  z2: null,
+	  W: null
+	};
 
-    if(textOperation[6] != null){
-      operation.x2 = parseInt(textOperation[5]),
-      operation.y2 = parseInt(textOperation[7]),
-      operation.z2 = parseInt(textOperation[8]),
-    } else {
-      operation.W = parseInt(textOperation[5]),
-    }
+	if(textOperation[6] != null){
+	  operation.x2 = parseInt(textOperation[5]),
+	  operation.y2 = parseInt(textOperation[7]),
+	  operation.z2 = parseInt(textOperation[8]),
+	} else {
+	  operation.W = parseInt(textOperation[5]),
+	}
 
-    return operation;
+	return operation;
   }
 
   //Now we construct the test cases array and return it
   var test_cases = [];
 
   for (var i=0; i < n_cases; i++) {
-    test_cases.push(parseCase());
+	test_cases.push(parseCase());
   }
 
   return test_cases;
