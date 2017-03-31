@@ -14,12 +14,12 @@ module.exports = function parse_input(input){
    * @throws Error if the test case block is badly constructed in the input
   */
   function parseCase() {
-	const testCaseHead = /(\d+)\s+(\d+)/g.exec(lines.shift());
-	if (testCaseHead == null){
+	const caseHead = /(\d+)\s+(\d+)/g.exec(lines.shift());
+	if (caseHead == null){
 	  throw new Error('Bad constructed test case: there is no N nor M');
 	}
-	const N = testCaseHead[1];
-	const M = testCaseHead[2];
+	const N = caseHead[1];
+	const M = caseHead[2];
 	var operations = [];
 
 	for(var i=0; i<M; i++){

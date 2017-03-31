@@ -1,5 +1,7 @@
 'use strict';
 
+const Operation = require('./operation');
+
 /**
  * A class abstraction of a test case block.
  * @param N: Matrix size.

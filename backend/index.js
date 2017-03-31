@@ -3,6 +3,7 @@
 const http = require('http');
 const express = require('express');
 const parse_input = require('./lib/parser');
+const Case = require('./lib/case');
 
 const app = express();
 app.use(require('body-parser').json());
@@ -15,7 +16,11 @@ app.post('/', function (request, response) {
     const input_parsed = parse_input(input);
     var response = '';
 
-    //TODO: ejecutar las operaciones correspondientes con el input_parsed
+    input_parsed.forEach(c => {
+      const test_case = new Case(c);
+      test_case.executeOperation();
+      response = test_case.output;
+    });
     response.send({ out: response });
   } catch (err) {
     response.status(500).send({ message: err.message });
