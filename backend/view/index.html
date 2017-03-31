@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cube Summation</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+    .row {
+      margin: 50px 100px;
+    }
+    #input_text, #output_text { 
+      width:80%;
+      height: 350px; 
+      font-size: 1.25em;
+    }
+    .buttons {
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="input_column col-md-5">
+        <h4><strong>Input:</strong></h4>
+        <textarea name="input_text" id="input_text">2
+4 5
+UPDATE 2 2 2 4
+QUERY 1 1 1 3 3 3
+UPDATE 1 1 1 23
+QUERY 2 2 2 4 4 4
+QUERY 1 1 1 3 3 3
+2 4
+UPDATE 2 2 2 1
+QUERY 1 1 1 1 1 1
+QUERY 1 1 1 2 2 2
+QUERY 2 2 2 2 2 2</textarea>
+      </div>
+      <div class="buttons col-md-2">
+        <button type="button" class="btn btn-primary">Send</button>
+        <br><br>
+        <button type="button" class="btn btn-primary">Reset</button>
+      </div>
+      <div class="output col-md-5">
+        <h4><strong>Output:</strong></h4>
+        <textarea name="output_text" id="output_text"></textarea>
+      </div>
+    </div>
+  </div>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>
